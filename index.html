@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #121212;
+      color: #ddd;
+      font-size: 1rem;
+    }
+
+    /* Header Section */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #1e1e1e;
+      color: white;
+      padding: 1rem 0;
+      z-index: 100;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    header nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    header nav a {
+      color: #ddd;
+      text-decoration: none;
+      font-size: 1.1rem;
+      padding: 1rem 2rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s ease, background-color 0.3s ease;
+    }
+
+    header nav a:hover {
+      background-color: #ff4081;
+      color: #121212;
+      border-radius: 4px;
+    }
+
+    /* Home Section */
+    #home {
+      background: linear-gradient(120deg, #6a0dad, #282828);
+      color: white;
+      text-align: center;
+      padding: 100px 2rem;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    #home h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    #home p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      line-height: 1.5;
+    }
+
+    #home .cta-btn {
+      background-color: #ff4081;
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    #home .cta-btn:hover {
+      background-color: #d5006d;
+      transform: scale(1.1);
+    }
+
+    /* Section Styling */
+    section {
+      padding: 100px 2rem;
+      min-height: 100vh;
+      text-align: center;
+      display: none; /* Initially hidden */
+    }
+
+    /* Active Section */
+    section.active {
+      display: block; /* Only active section is displayed */
+    }
+
+    /* Home Section */
+    #home {
+      background: linear-gradient(120deg, #6a0dad, #282828);
+      color: white;
+    }
+
+    #home h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    #home p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      line-height: 1.5;
+    }
+
+    #home .cta-btn {
+      background-color: #ff4081;
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    #home .cta-btn:hover {
+      background-color: #d5006d;
+      transform: scale(1.1);
+    }
+
+    /* My Work Section */
+    .work-view {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .work-item {
+      background: #333;
+      border-radius: 8px;
+      padding: 1rem;
+      color: #fff;
+      transition: transform 0.3s ease;
+    }
+
+    .view-toggle button {
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 0 0.5rem;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .view-toggle button:hover {
+      background-color: #444;
+      transform: scale(1.1);
+    }
+
+    .work-item:hover {
+      transform: scale(1.05);
+      background-color: #444;
+    }
+
+    .work-item iframe {
+      width: 100%;
+      height: 200px;
+      border: none;
+      border-radius: 8px;
+    }
+
+    .feature-btn {
+      background-color: #ff4081;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .feature-btn:hover {
+      background-color: #d5006d;
+      transform: scale(1.05);
+    }
+
+    .feature-list {
+      display: none;
+      margin-top: 1rem;
+      background: #222;
+      padding: 1rem;
+      border-radius: 8px;
+      color: #ddd;
+      text-align: left;
+    }
+
+    .feature-list li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* List View */
+    #list-view {
+      display: none;
+    }
+
+    #list-view ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #list-view ul li {
+      background: #333;
+      margin: 0.5rem 0;
+      padding: 1rem;
+      border-radius: 8px;
+      color: #fff;
+      transition: transform 0.3s ease;
+    }
+
+    #list-view ul li:hover {
+      transform: scale(1.02);
+      background-color: #444;
+    }
+
+    /* About Me Section */
+    #about-me {
+      background: #121212;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background-color: #1e1e1e;
+      color: #fff;
+    }
+
+    footer a {
+      color: #ff4081;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <nav>
+      <a href="#home" onclick="navigate('home')">Home</a>
+      <a href="#my-work" onclick="navigate('my-work')">My Work</a>
+      <a href="#about-me" onclick="navigate('about-me')">About Me</a>
+    </nav>
+  </header>
+
+  <!-- Home Section -->
+  <section id="home" class="active">
+    <h1>Welcome to My Portfolio</h1>
+    <p>I'm flame a developer. Explore my work and add me on discord if you have any questions!</p>
+    <button class="cta-btn" onclick="window.open('https://discord.com/users/444853236684292096', '_blank')">Get in Touch</button>
+  </section>
+
+  <!-- My Work Section -->
+  <section id="my-work">
+    <h1>My Work</h1>
+    <div class="view-toggle">
+      <button id="showcase-btn">Showcase View</button>
+      <button id="list-btn">List View</button>
+    </div>
+
+    <!-- Showcase View -->
+    <div class="work-view" id="showcase-view">
+      <div class="work-item">
+        <h3>A Better Advertisement System</h3>
+        <p>Created a dynamic advertisement system to enhance user experience in Garry's Mod.</p>
+        <iframe src="https://www.youtube.com/embed/4k_4mOI0Hf4"></iframe>
+        <button class="feature-btn" onclick="toggleFeatures('features1')">Features</button>
+        <ul id="features1" class="feature-list">
+          <li>Easy configuration</li>
+          <li>Discord Webhook integration</li>
+          <li>Blacklist system</li>
+        </ul>
+      </div>
+      <div class="work-item">
+        <h3>Shipment System</h3>
+        <p>Designed and implemented a shipment system for item management in Garry's Mod.</p>
+        <iframe src="https://www.youtube.com/embed/t93DL2TfVuc"></iframe>
+        <button class="feature-btn" onclick="toggleFeatures('features2')">Features</button>
+        <ul id="features2" class="feature-list">
+          <li>Custom shipment crate management</li>
+          <li>Different Options for the delivery UI </li>
+          <li>Theme colors</li>
+        </ul>
+      </div>
+      <div class="work-item">
+        <h3>Coming soon </h3>
+        <p>soon.</p>
+        <iframe src=""></iframe>
+        <button class="feature-btn" onclick="toggleFeatures('features2')">Features</button>
+        <ul id="features2" class="feature-list">
+          <li>soon</li>
+
+        </ul>
+      </div>
+    </div>
+
+    <!-- List View -->
+    <div id="list-view">
+      <ul>
+        <li>A Better Advertisement System</li>
+        <li>Shipment System</li>
+        <li>Coming soon!(Im to lazy to add everything.)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- About Me Section -->
+  <section id="about-me">
+    <h1>About Me</h1>
+    <p>
+      Hello! I’m a developer. I mostly do stuff for Garrys mod, if your interested in working with me contact me on Discord!.
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p><a href="#home" onclick="navigate('home')">Flame :)</a></p>
+  </footer>
+
+  <script>
+    // Navigation functionality
+    function navigate(sectionId) {
+      const sections = document.querySelectorAll('section');
+      sections.forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(sectionId).classList.add('active');
+    }
+
+    // Toggle feature list visibility
+    function toggleFeatures(featuresId) {
+      const featureList = document.getElementById(featuresId);
+      featureList.style.display = featureList.style.display === "block" ? "none" : "block";
+    }
+    document.getElementById("showcase-btn").addEventListener("click", function() {
+      document.getElementById("showcase-view").style.display = "grid";
+      document.getElementById("list-view").style.display = "none";
+    });
+
+    document.getElementById("list-btn").addEventListener("click", function() {
+      document.getElementById("showcase-view").style.display = "none";
+      document.getElementById("list-view").style.display = "block";
+    });
+  </script>
+
+</body>
+</html>
